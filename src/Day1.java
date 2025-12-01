@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class Day1 {
+    public static void main(String[] args) {
+        Day1.solvePart2();
+    }
+
     // Every time we stop at 0, we update counter.
     public static void solvePart1() {
         int nZeros = 0;
