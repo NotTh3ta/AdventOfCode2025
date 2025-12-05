@@ -34,24 +34,17 @@ public class Day5Part2 {
 
         // sort ranges by start value
         ranges.sort(Comparator.comparingLong(o -> o[0]));
-        int i = -1;
+        int i = 0;
+        reducedRanges.add(ranges.getFirst());
         for (long[] range : ranges) {
-            if (reducedRanges.isEmpty()) {
-                reducedRanges.add(range);
-                i++;
-                continue;
-            }
-
             // compare vals
-            if (range[0] == reducedRanges.get(i)[0]) {
+            // If overlap, change upper bound to max
+            if (range[0] <= reducedRanges.get(i)[1]) {
                 reducedRanges.get(i)[1] = Math.max(range[1], reducedRanges.get(i)[1]);
             } else {
-                if (range[0] <= reducedRanges.get(i)[1]) {
-                    reducedRanges.get(i)[1] = Math.max(range[1], reducedRanges.get(i)[1]);
-                } else {
-                    reducedRanges.add(range);
-                    i++;
-                }
+                // If no overlap, add to reducedRanges
+                reducedRanges.add(range);
+                i++;
             }
         }
 
